@@ -317,12 +317,14 @@
                      return;
                  }
 
-                 // Make the move (Human always)
-                 makeMove(index, HUMAN_PLAYER);
+               // Make the move for the current player
+                 makeMove(index, currentPlayer); // Use the actual currentPlayer
 
                  // If playing vs computer and game is still active, trigger computer's turn
+                 // Note: makeMove already switched the currentPlayer *before* this check
                  if (currentGameMode === 'computer' && gameActive) {
-                     // currentPlayer is now COMPUTER_PLAYER after makeMove switches
+                      // If the move was just made by HUMAN_PLAYER, the currentPlayer is now COMPUTER_PLAYER
+                      // and we should trigger the computer's move.
                      triggerComputerMove();
                  }
             }
